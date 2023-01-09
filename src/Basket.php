@@ -2,9 +2,6 @@
 
 namespace src;
 
-use BasketItem;
-use Exception;
-
 class Basket
 {
     /** @var Offer|null */
@@ -20,12 +17,12 @@ class Basket
     }
 
     /**
-     * @throws Exception
+     * @throws DuplicateItem
      */
     public function addItem(BasketItem $item)
     {
         if (in_array($item, $this->items)) {
-            throw new Exception("Item {$item->getCode()} is already in the basket!");
+            throw new DuplicateItem("Item {$item->getCode()} is already in the basket!");
         }
         $this->items[] = $item;
     }
