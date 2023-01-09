@@ -1,6 +1,6 @@
 <?php
 
-namespace Basket;
+namespace src;
 
 use Exception;
 
@@ -27,6 +27,22 @@ class Basket
             throw new Exception("Product {$product->getCode()} is already in the basket!");
         }
         $this->products[] = $product;
+    }
+
+    /**
+     * @return Offer|null
+     */
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProducts(): array
+    {
+        return $this->products;
     }
 
     public function getTotal(): float

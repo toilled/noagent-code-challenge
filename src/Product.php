@@ -1,6 +1,6 @@
 <?php
 
-namespace Basket;
+namespace src;
 
 class Product
 {
