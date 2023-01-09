@@ -1,6 +1,7 @@
 <?php
 
 include "../src/Basket.php";
+include "../src/BasketItem.php";
 include "../src/Offer.php";
 include "../src/Product.php";
 
@@ -25,14 +26,14 @@ final class BasketTest extends TestCase
             new Product('P004', 'EICR Certificate', 51.00),
         ];
         foreach ($products as $product) {
-            $this->assertInstanceOf(Product::class, $product, 'Product not created');
+            $this->assertInstanceOf(BasketItem::class, $product, 'Product not a BasketItem');
             try {
-                $basket->addProduct($product);
+                $basket->addItem($product);
             } catch (Exception $exception) {
                 echo $exception->getMessage() . PHP_EOL;
             }
         }
-        $this->assertCount(4, $basket->getProducts(), 'Product missing from basket');
-        $this->assertEquals(391.05, $basket->getTotal(), 'Incorrect basket total');
+        $this->assertCount(4, $basket->getItems(), 'Product missing from basket');
+        $this->assertEquals(391.05, $basket->total(), 'Incorrect basket total');
     }
 }

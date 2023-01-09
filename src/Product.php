@@ -2,7 +2,9 @@
 
 namespace src;
 
-class Product
+use BasketItem;
+
+class Product implements BasketItem
 {
     private string $code;
     private string $name;

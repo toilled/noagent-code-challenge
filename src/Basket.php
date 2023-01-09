@@ -2,14 +2,15 @@
 
 namespace src;
 
+use BasketItem;
 use Exception;
 
 class Basket
 {
     /** @var Offer|null */
     private ?Offer $offer;
-    /** @var Product[] */
-    private array $products = [];
+    /** @var BasketItem[] */
+    private array $items = [];
 
     public function __construct(Offer $offer = null)
     {
@@ -21,35 +22,29 @@ class Basket
     /**
      * @throws Exception
      */
-    public function addProduct(Product $product)
+    public function addItem(BasketItem $item)
     {
-        if (in_array($product, $this->products)) {
-            throw new Exception("Product {$product->getCode()} is already in the basket!");
+        if (in_array($item, $this->items)) {
+            throw new Exception("Item {$item->getCode()} is already in the basket!");
         }
-        $this->products[] = $product;
+        $this->items[] = $item;
     }
 
-    /**
-     * @return Offer|null
-     */
     public function getOffer(): ?Offer
     {
         return $this->offer;
     }
 
-    /**
-     * @return array
-     */
-    public function getProducts(): array
+    public function getItems(): array
     {
-        return $this->products;
+        return $this->items;
     }
 
-    public function getTotal(): float
+    public function total(): float
     {
         $total = 0;
-        foreach ($this->products as $product) {
-            $total += $product->getPrice();
+        foreach ($this->items as $item) {
+            $total += $item->getPrice();
         }
 
         if (isset($this->offer)) {
